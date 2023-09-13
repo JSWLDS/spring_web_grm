@@ -2,12 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="#{title.entry}">Title</title>
+    <style>
+        h3 {
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
   <h2>계산결과</h2>
-  <h3 th:text="${calcForm.getLeftNum()}"></h3> + <h3 th:text="${calcForm.getRightNum()}"></h3>  <h3 th:text="${result}"></h3>
-
+  <h3 th:text="${calcForm.getLeftNum()}"></h3> + <h3 th:text="${calcForm.getRightNum()}"></h3> = <h3 th:text="${result}"></h3>
+<br>
 
   <h3>[[${calcForm.leftNum}]] + [[${calcForm.rightNum}]] = [[${result}]]</h3>
 </body>

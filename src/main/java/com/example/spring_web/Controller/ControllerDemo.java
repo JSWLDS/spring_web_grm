@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.spring_web.repository.TableRepository;
 
+import java.util.List;
+
 @Controller
 public class ControllerDemo {
 
@@ -26,7 +28,10 @@ public class ControllerDemo {
     }
 
     @GetMapping ("/home")
-    public String showHome(){
+    public String showHome(Model model){
+        List<String> nameList = tableRepository.getAllName();
+        model.addAttribute("nameList", nameList);
+
         return "home";
     }
 
@@ -64,6 +69,7 @@ public class ControllerDemo {
         return "submit/c";
     }
 
+    // entry.html에서 사용
     @ModelAttribute
     public CalcForm setUpForm() {
         return new CalcForm();
