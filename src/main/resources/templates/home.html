@@ -11,7 +11,7 @@ hello world(HOME)
 <table border="1">
     <tr th:each="content, i : ${nameList}">
         <td  th:text="${i.index}"></td>
-        <td  th:text="${content}"></td>
+        <td  th:text="${content.getName()}"></td>
     </tr>
 </table>
 

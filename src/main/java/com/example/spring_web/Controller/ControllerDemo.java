@@ -1,7 +1,9 @@
 package com.example.spring_web.Controller;
 
 import com.example.spring_web.form.CalcForm;
+import com.example.spring_web.table.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,8 +20,12 @@ import java.util.List;
 @Controller
 public class ControllerDemo {
 
-    @Autowired
+    final
     TableRepository tableRepository;
+
+    public ControllerDemo(TableRepository tableRepository) {
+        this.tableRepository = tableRepository;
+    }
 
 
     @GetMapping("/index")
@@ -29,7 +35,7 @@ public class ControllerDemo {
 
     @GetMapping ("/home")
     public String showHome(Model model){
-        List<String> nameList = tableRepository.getAllName();
+        List<Member> nameList = tableRepository.findAll();
         model.addAttribute("nameList", nameList);
 
         return "home";
