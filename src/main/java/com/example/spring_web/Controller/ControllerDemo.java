@@ -22,14 +22,21 @@ import java.util.List;
 @ComponentScan(basePackages = {"com.example.spring_web.memberInterface"})
 public class ControllerDemo {
 
-    @Autowired
+    final
     TableRepository tableRepository;
 
-    @Autowired
+    final
     CalcValidator calcValidator;
 
-    @Autowired
+    final
     MemberRepository memberRepository;
+
+    @Autowired
+    public ControllerDemo(TableRepository tableRepository, CalcValidator calcValidator, MemberRepository memberRepository) {
+        this.tableRepository = tableRepository;
+        this.calcValidator = calcValidator;
+        this.memberRepository = memberRepository;
+    }
 
 
     @InitBinder("calcForm") // 유효성 검사를 진행할 메소드를 지정해준다. validate()메서드를 호출하지 않아도 최초로 호출되어 데이터를 검증함.  value = 검사할 클래스(객체)
