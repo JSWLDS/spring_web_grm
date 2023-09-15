@@ -1,12 +1,14 @@
 <!DOCTYPE html >
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{commons/layout}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 hello world (INDEX)
-<div>
+<div layout:fragment="content">
     <h3><a th:href="@{/function/1}">기능-1</a></h3>
     <h3><a th:href="@{/function/2}">기능-2</a></h3>
     <h3><a th:href="@{/function/3}">기능-3</a></h3>

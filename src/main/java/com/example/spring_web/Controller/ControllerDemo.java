@@ -1,33 +1,41 @@
 package com.example.spring_web.Controller;
 
+import com.example.spring_web.Validator.CalcValidator;
 import com.example.spring_web.form.CalcForm;
+import com.example.spring_web.memberInterface.MemberRepository;
 import com.example.spring_web.table.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.spring_web.repository.TableRepository;
 
 import java.util.List;
 
 @Controller
+@ComponentScan(basePackages = {"com.example.spring_web.memberInterface"})
 public class ControllerDemo {
 
-    final
+    @Autowired
     TableRepository tableRepository;
 
-    public ControllerDemo(TableRepository tableRepository) {
-        this.tableRepository = tableRepository;
+    @Autowired
+    CalcValidator calcValidator;
+
+    @Autowired
+    MemberRepository memberRepository;
+
+
+    @InitBinder("calcForm") // 유효성 검사를 진행할 메소드를 지정해준다. validate()메서드를 호출하지 않아도 최초로 호출되어 데이터를 검증함.  value = 검사할 클래스(객체)
+    public void initBinder(WebDataBinder webDataBinder) { // WebDataBinder 클래스가 유효성검사를 진행할 메소드를 추가할 수 있다.
+        webDataBinder.addValidators(calcValidator);
     }
-
-
     @GetMapping("/index")
     public String showIndex(){
         return "index";
@@ -35,7 +43,7 @@ public class ControllerDemo {
 
     @GetMapping ("/home")
     public String showHome(Model model){
-        List<Member> nameList = tableRepository.findAll();
+        List<Member> nameList = (List<Member>) memberRepository.findAll();
         model.addAttribute("nameList", nameList);
 
         return "home";

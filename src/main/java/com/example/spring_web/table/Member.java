@@ -3,6 +3,7 @@ package com.example.spring_web.table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ import javax.validation.constraints.NotNull;
 public class Member {
 
     @Id
+    @org.springframework.data.annotation.Id
     @NotNull
     @Column(name="id")
     private Long id;
