@@ -1,29 +1,23 @@
 package com.example.spring_web.table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull; //
+import lombok.Data;
 
 @Entity
+@Table(name = "member") // 안써도 나옴
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@NamedQueries
-        (
-                {
-                        @NamedQuery(name = "Member.all", query = "SELECT m FROM Member m " ),
-                        @NamedQuery(name = "Member.findByName", query = "SELECT m.name FROM Member m ")
-                }
-        )
+//@NamedQueries
+//        (
+//                {
+//                        @NamedQuery(name = "Member.all", query = "SELECT m FROM Member m " ),
+//                        @NamedQuery(name = "Member.findByName", query = "SELECT m.name FROM Member m ")
+//                }
+//        )
 public class Member {
 
     @Id
-    @org.springframework.data.annotation.Id
     @NotNull
     @Column(name="id")
     private Long id;

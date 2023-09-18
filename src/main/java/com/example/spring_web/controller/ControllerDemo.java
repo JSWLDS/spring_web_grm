@@ -1,12 +1,10 @@
-package com.example.spring_web.Controller;
+package com.example.spring_web.controller;
 
-import com.example.spring_web.Validator.CalcValidator;
+import com.example.spring_web.validator.CalcValidator;
 import com.example.spring_web.form.CalcForm;
-import com.example.spring_web.memberInterface.MemberRepository;
+import com.example.spring_web.repository.MemberRepository;
 import com.example.spring_web.table.Member;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,24 +17,16 @@ import com.example.spring_web.repository.TableRepository;
 import java.util.List;
 
 @Controller
-@ComponentScan(basePackages = {"com.example.spring_web.memberInterface"})
 public class ControllerDemo {
 
-    final
+    @Autowired
     TableRepository tableRepository;
 
-    final
+    @Autowired
     CalcValidator calcValidator;
 
-    final
-    MemberRepository memberRepository;
-
     @Autowired
-    public ControllerDemo(TableRepository tableRepository, CalcValidator calcValidator, MemberRepository memberRepository) {
-        this.tableRepository = tableRepository;
-        this.calcValidator = calcValidator;
-        this.memberRepository = memberRepository;
-    }
+    MemberRepository memberRepository;
 
 
     @InitBinder("calcForm") // 유효성 검사를 진행할 메소드를 지정해준다. validate()메서드를 호출하지 않아도 최초로 호출되어 데이터를 검증함.  value = 검사할 클래스(객체)
@@ -50,7 +40,7 @@ public class ControllerDemo {
 
     @GetMapping ("/home")
     public String showHome(Model model){
-        List<Member> nameList = (List<Member>) memberRepository.findAll();
+        List<Member> nameList = memberRepository.findAll();
         model.addAttribute("nameList", nameList);
 
         return "home";

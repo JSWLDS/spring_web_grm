@@ -1,9 +1,8 @@
-package com.example.spring_web.Validator;
+package com.example.spring_web.validator;
 
 import com.example.spring_web.form.CalcForm;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 
