@@ -8,13 +8,13 @@ import lombok.Data;
 @Entity
 @Table(name = "member") // 안써도 나옴
 @Data
-//@NamedQueries
-//        (
-//                {
-//                        @NamedQuery(name = "Member.all", query = "SELECT m FROM Member m " ),
-//                        @NamedQuery(name = "Member.findByName", query = "SELECT m.name FROM Member m ")
-//                }
-//        )
+@NamedQueries
+        (
+                {
+                        @NamedQuery(name = "Member.all", query = "SELECT m FROM Member m " ),
+                        @NamedQuery(name = "Member.findByName", query = "SELECT m.name FROM Member m ")
+                }
+        )
 public class Member {
 
     @Id

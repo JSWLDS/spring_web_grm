@@ -12,7 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.spring_web.repository.TableRepository;
+import com.example.spring_web.repository.TableRepository_test;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import java.util.List;
 public class ControllerDemo {
 
     @Autowired
-    TableRepository tableRepository;
+    TableRepository_test tableRepository;
 
     @Autowired
     CalcValidator calcValidator;
@@ -33,50 +33,59 @@ public class ControllerDemo {
     public void initBinder(WebDataBinder webDataBinder) { // WebDataBinder 클래스가 유효성검사를 진행할 메소드를 추가할 수 있다.
         webDataBinder.addValidators(calcValidator);
     }
+
     @GetMapping("/index")
-    public String showIndex(){
+    public String showIndex() {
+
+
         return "index";
     }
 
-    @GetMapping ("/home")
-    public String showHome(Model model){
+    @GetMapping("/home")
+    public String showHome(Model model) {
         List<Member> nameList = memberRepository.findAll();
         model.addAttribute("nameList", nameList);
 
         return "home";
     }
-
+//
 //    @GetMapping("/getNameAll")
-//    public List<String> getNameAll() {
-//        return tableRepository.getAllName();
+//    public String getNameAll(Model model) {
+//        List<Member> nameList = tableRepository.findAll();
+//        model.addAttribute("nameList", nameList);
+//
+//        return "home";
 //    }
 
     @GetMapping("/function/{no}")
     public String selectFunction(@PathVariable Integer no) {
         String view = null;
         switch (no) {
-            case 1: view = "pathVariable/function1";
+            case 1:
+                view = "pathVariable/function1";
                 break;
-            case 2: view = "pathVariable/function2";
+            case 2:
+                view = "pathVariable/function2";
                 break;
-            case 3: view = "pathVariable/function3";
+            case 3:
+                view = "pathVariable/function3";
                 break;
         }
         return view;
     }
 
     @PostMapping(value = "send", params = "a")
-    public String showAView(){
+    public String showAView() {
         return "submit/a";
     }
 
     @PostMapping(value = "send", params = "b")
-    public String showBView(){
+    public String showBView() {
         return "submit/b";
     }
 
     @PostMapping(value = "send", params = "c")
-    public String showCView(){
+    public String showCView() {
         return "submit/c";
     }
 
@@ -92,9 +101,9 @@ public class ControllerDemo {
     }
 
     @PostMapping("calc")
-    public String confirmView(@Validated CalcForm form, BindingResult bindingResult, Model model){
+    public String confirmView(@Validated CalcForm form, BindingResult bindingResult, Model model) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "calc/entry";
         }
         Integer result = form.getLeftNum() + form.getRightNum();
