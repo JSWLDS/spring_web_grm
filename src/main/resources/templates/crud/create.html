@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{commons/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HOME</title>
+</head>
+<body>
+hello world(HOME)
+<div layout:fragment="content">
+    <table border="1">
+        <tr th:each="content, i : ${nameList}">
+            <td  th:text="${i.index}"></td>
+            <td  th:text="${content.getId()}"></td>
+            <td  th:text="${content.getName()}"></td>
+        </tr>
+    </table>
+</div>
+
+    <br>
+--------------------------------------------------------------------------------------------
+</body>
+</html>

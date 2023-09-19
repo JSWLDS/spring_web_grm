@@ -30,8 +30,8 @@ public class CalcValidator implements Validator {
         }
 
         if(calcForm.getLeftNum() != null && calcForm.getRightNum() != null) {
-            if(!(calcForm.getLeftNum() % 2 == 1) &&(calcForm.getRightNum() % 2 == 0)){
-                errors.reject("com.example.spring_web.Validator.CalcValidator.message");
+            if(!(calcForm.getLeftNum() % 2 == 1) || !(calcForm.getRightNum() % 2 == 0)){
+                errors.reject("com.example.spring_web.validator.CalcValidator.message");
             }
         }
 
